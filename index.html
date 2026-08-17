@@ -1,0 +1,2044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Domains · Stan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --stan-primary-primary-color: #6355ff;
+    --stan-primary-dark-color: #00106d;
+    --stan-primary-light-color: #ebebff;
+    --stan-primary-soft-color: #b5bcff;
+    --stan-text-dark-color: #131f60;
+    --stan-text-light-color: #6875a1;
+    --stan-gray-strike-color: #dae0ea;
+    --stan-gray-soft-color: #f2f4f8;
+    --stan-white: #ffffff;
+    --stan-negative-primary-color: #ff5050;
+    --stan-negative-light-color: #fff2f2;
+    --stan-positive-primary-color: #00c6a4;
+    --stan-positive-light-color: #e4fff9;
+    --stan-positive-dark-color: #00554b;
+    --stan-box-shadow: 0px 15px 50px rgba(0, 29, 109, 0.07), inset 0px -5px 10px rgba(0, 0, 0, 0.01);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    color: var(--stan-text-dark-color);
+    background: var(--stan-white);
+  }
+
+  a { text-decoration: none; color: inherit; }
+
+  /* ---------- Left sidebar ---------- */
+
+  .leftPanel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 210px;
+    height: 100vh;
+    background: var(--stan-primary-light-color);
+    padding: 16px 12px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .brandSpace {
+    padding: 14px 12px 26px;
+  }
+
+  .brandSpace img { height: 40px; display: block; }
+
+  .menus { flex: 1; overflow: visible; }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .menus ul {
+    padding: 6px 0 0;
+  }
+
+  .menu-item { margin-bottom: 4px; }
+
+  .menu-item-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--stan-text-dark-color);
+    cursor: pointer;
+  }
+
+  .menu-item-link:hover {
+    color: var(--stan-primary-primary-color);
+  }
+  .menu-item-link:hover .menu-item-icon { color: var(--stan-primary-primary-color); }
+
+  .menu-item-link.active {
+    background: var(--stan-white);
+    box-shadow: var(--stan-box-shadow);
+    color: var(--stan-primary-primary-color);
+  }
+  .menu-item-link.active .menu-item-icon { color: var(--stan-primary-primary-color); }
+
+  .menu-item-icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    color: var(--stan-primary-dark-color);
+  }
+
+  .menu-item-icon path,
+  .menu-item-icon circle {
+    fill: currentColor;
+  }
+  .menu-item-icon.stroke path,
+  .menu-item-icon.stroke circle {
+    fill: none;
+    stroke: currentColor;
+  }
+
+  .menu-item-title { flex: 1; }
+
+  .menu-item-badge {
+    display: inline-flex;
+    align-items: center;
+    background: var(--stan-primary-primary-color);
+    color: var(--stan-white);
+    border-radius: 999px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    margin-left: auto;
+  }
+
+  .sidebar-divider {
+    height: 1px;
+    background: var(--stan-gray-strike-color);
+    margin: 8px 12px;
+  }
+
+  .sidebar-footer { margin-top: auto; }
+
+  .profile-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 10px;
+  }
+
+  .profile-row img {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .profile-row span {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  /* ---------- Main container ---------- */
+
+  .main {
+    margin-left: 210px;
+    min-height: 100vh;
+    padding: 28px 40px;
+  }
+
+  .page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 20px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--stan-gray-strike-color);
+  }
+
+  .page-header h1 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--stan-text-dark-color);
+    margin: 0;
+  }
+
+  .store-url {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--stan-primary-primary-color);
+    font-weight: 500;
+  }
+
+  .store-url button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    border: 1px solid var(--stan-gray-strike-color);
+    background: var(--stan-white);
+    color: var(--stan-text-light-color);
+    cursor: pointer;
+  }
+
+  .store-url button:hover {
+    background: var(--stan-gray-soft-color);
+  }
+
+  .store-url button svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* ---------- Domains page ---------- */
+
+  .domains-page {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 760px;
+  }
+
+  .card {
+    background: var(--stan-white);
+    border: 1px solid var(--stan-gray-strike-color);
+    border-radius: 18px;
+    padding: 28px;
+    box-shadow: var(--stan-box-shadow);
+  }
+
+  .btn {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 999px;
+    padding: 12px 22px;
+    cursor: pointer;
+    border: 1.5px solid transparent;
+    transition: background .15s ease, color .15s ease, border-color .15s ease;
+    white-space: nowrap;
+  }
+
+  .btn-primary {
+    background: var(--stan-primary-primary-color);
+    color: var(--stan-white);
+  }
+  .btn-primary:hover { background: #4a01e3; }
+
+  .btn-outline {
+    background: var(--stan-white);
+    color: var(--stan-primary-primary-color);
+    border-color: var(--stan-primary-primary-color);
+  }
+  .btn-outline:hover { background: var(--stan-primary-light-color); }
+
+  .btn-text {
+    background: none;
+    border: none;
+    color: var(--stan-primary-primary-color);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 0;
+  }
+  .btn-text:hover { text-decoration: underline; }
+
+  .btn-sm {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+
+  .btn[disabled] {
+    opacity: .5;
+    cursor: not-allowed;
+  }
+
+  /* Search hero */
+
+  .search-hero-card h2 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--stan-text-dark-color);
+    margin: 0 0 6px;
+  }
+
+  .search-subline {
+    color: var(--stan-text-light-color);
+    font-size: 15px;
+    margin: 0 0 22px;
+  }
+
+  .search-form {
+    display: flex;
+    gap: 10px;
+  }
+
+  .search-input-wrap {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--stan-gray-soft-color);
+    border: 1px solid var(--stan-gray-strike-color);
+    border-radius: 12px;
+    padding: 0 16px;
+  }
+
+  .search-input-wrap:focus-within {
+    border-color: var(--stan-primary-primary-color);
+    background: var(--stan-white);
+  }
+
+  .search-icon {
+    width: 18px;
+    height: 18px;
+    color: var(--stan-text-light-color);
+    flex-shrink: 0;
+  }
+
+  .search-input-wrap input {
+    flex: 1;
+    border: none;
+    background: none;
+    outline: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: var(--stan-text-dark-color);
+    padding: 13px 0;
+  }
+
+  .search-tips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 18px;
+  }
+
+  .tip-chip {
+    display: inline-flex;
+    align-items: center;
+    background: var(--stan-primary-light-color);
+    color: var(--stan-primary-primary-color);
+    font-size: 12.5px;
+    font-weight: 600;
+    border-radius: 999px;
+    padding: 6px 14px;
+  }
+
+  /* Results */
+
+  .results-count {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--stan-text-light-color);
+    margin-bottom: 10px;
+    padding-left: 4px;
+  }
+
+  .hero-group {
+    margin-bottom: 20px;
+  }
+
+  .hero-card {
+    background: var(--stan-primary-light-color);
+    border: 1.5px solid var(--stan-primary-soft-color);
+    border-radius: 16px;
+    padding: 22px 26px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 18px;
+  }
+
+  .hero-card__info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+  }
+
+  .hero-card__cta {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-shrink: 0;
+  }
+
+  .hero-card .domain-name {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--stan-text-dark-color);
+    word-break: break-all;
+  }
+
+  .free-badge sup { margin-right: 3px; }
+
+  .free-badge {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    background: #e4fff9;
+    color: #00554b;
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .02em;
+    border-radius: 999px;
+    padding: 4px 10px;
+  }
+
+  .price-line {
+    font-size: 13px;
+    color: var(--stan-text-light-color);
+    white-space: nowrap;
+  }
+
+  .price-line strong {
+    color: var(--stan-text-dark-color);
+    font-weight: 700;
+  }
+
+  .other-domains-card { padding: 0; overflow: hidden; }
+
+  .card-label {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--stan-text-light-color);
+    padding: 20px 24px 12px;
+  }
+
+  .domain-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 24px;
+    border-top: 1px solid var(--stan-gray-strike-color);
+    gap: 12px;
+  }
+
+  .domain-row-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+  }
+
+  .domain-row .domain-name {
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--stan-text-dark-color);
+  }
+
+  .country-badge {
+    background: var(--stan-gray-soft-color);
+    color: var(--stan-text-light-color);
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 999px;
+    padding: 4px 10px;
+    flex-shrink: 0;
+  }
+
+  .domain-row-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-shrink: 0;
+  }
+
+  .taken-label {
+    font-size: 13px;
+    color: var(--stan-text-light-color);
+    font-weight: 500;
+  }
+
+  /* Registration card */
+
+  .eyebrow {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--stan-text-light-color);
+    margin-bottom: 8px;
+  }
+
+  .reg-domain-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .reg-domain-row .domain-name {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--stan-text-dark-color);
+  }
+
+  .price-chip {
+    background: var(--stan-gray-soft-color);
+    color: var(--stan-text-dark-color);
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 999px;
+    padding: 5px 12px;
+  }
+
+  .form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+
+  .form-field { flex: 1; min-width: 140px; display: flex; flex-direction: column; gap: 6px; }
+
+  .form-field input,
+  .form-field select { width: 100%; }
+
+  .form-field label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--stan-text-dark-color);
+  }
+
+  .form-field input,
+  .form-field select {
+    border: 1px solid var(--stan-gray-strike-color);
+    background: var(--stan-gray-soft-color);
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14.5px;
+    color: var(--stan-text-dark-color);
+    outline: none;
+  }
+
+  .form-field input:focus,
+  .form-field select:focus {
+    border-color: var(--stan-primary-primary-color);
+    background: var(--stan-white);
+  }
+
+  .eyebrow--section {
+    margin-top: 4px;
+  }
+
+  .auto-renew-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    border: 1px solid var(--stan-gray-strike-color);
+    border-radius: 14px;
+    padding: 16px 18px;
+    margin-top: 18px;
+  }
+
+  .auto-renew-card__title {
+    font-weight: 700;
+    font-size: 14.5px;
+    color: var(--stan-text-dark-color);
+    margin-bottom: 3px;
+  }
+
+  .auto-renew-card__subtitle {
+    font-size: 12.5px;
+    color: var(--stan-text-light-color);
+  }
+
+  .consent-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 18px 0 22px;
+  }
+
+  .consent-row input { margin-top: 3px; accent-color: var(--stan-primary-primary-color); }
+
+  .consent-row label {
+    font-size: 13.5px;
+    color: var(--stan-text-light-color);
+    line-height: 1.5;
+  }
+
+  .consent-row a { color: var(--stan-primary-primary-color); text-decoration: underline; }
+
+  .reg-actions { display: flex; align-items: center; gap: 16px; }
+  .reg-actions .btn-primary { flex: 1; }
+
+  /* Success card */
+
+  .success-card { padding: 0; overflow: hidden; }
+
+  .success-header {
+    background: linear-gradient(90deg, #e4fff9 0%, #ffffff 100%);
+    padding: 32px 28px 24px;
+  }
+
+  .success-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #00c6a4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+  }
+
+  .success-icon svg { width: 22px; height: 22px; color: #fff; }
+
+  .success-header h2 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--stan-text-dark-color);
+    margin: 0 0 4px;
+  }
+
+  .success-header p {
+    margin: 0;
+    color: var(--stan-text-light-color);
+    font-size: 14.5px;
+  }
+
+  .success-body { padding: 24px 28px 28px; }
+
+  .success-body p {
+    color: var(--stan-text-dark-color);
+    font-size: 14.5px;
+    line-height: 1.6;
+    margin: 0 0 20px;
+  }
+
+  .success-body a { color: var(--stan-primary-primary-color); font-weight: 600; }
+
+  /* Search hero / success + phone preview row */
+
+  .hero-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .hero-row-main {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  @media (max-width: 760px) {
+    .hero-row { flex-direction: column; }
+    .phone-preview-section { align-self: center; }
+  }
+
+  .phone-preview-section { flex-shrink: 0; }
+
+  .phone-frame {
+    width: 246px;
+    height: 470px;
+    border: 8px solid var(--stan-text-dark-color);
+    border-radius: 34px;
+    background: var(--stan-white);
+    box-shadow: var(--stan-box-shadow);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .phone-top-bar {
+    background: var(--stan-text-dark-color);
+    color: var(--stan-white);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    text-align: center;
+    padding: 8px 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .phone-iframe {
+    flex: 1;
+    width: 100%;
+    border: none;
+    background: var(--stan-white);
+  }
+
+  /* Connect a domain */
+
+  .connect-domain-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 18px;
+  }
+
+  .connect-domain-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--stan-text-dark-color);
+    margin: 0 0 6px;
+  }
+
+  .connect-domain-subtitle {
+    font-size: 13.5px;
+    color: var(--stan-text-light-color);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .connect-domain-btn { flex-shrink: 0; white-space: nowrap; }
+
+  /* Manage domain */
+
+  .back-link {
+    display: inline-flex;
+    margin-bottom: 18px;
+  }
+
+  .manage-header { margin-bottom: 20px; }
+
+  .manage-header h2 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--stan-text-dark-color);
+    margin: 0 0 6px;
+  }
+
+  .manage-info-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .manage-info-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--stan-primary-primary-color), #3e68ff);
+    color: var(--stan-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .manage-info-icon svg { width: 20px; height: 20px; }
+
+  .manage-info-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 4px;
+  }
+
+  .manage-info-row .domain-name {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--stan-text-dark-color);
+  }
+
+  .manage-info-subtitle {
+    font-size: 13px;
+    color: var(--stan-text-light-color);
+    margin: 0;
+  }
+
+  .pill-badge {
+    display: inline-flex;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 700;
+    border-radius: 999px;
+    padding: 3px 10px;
+  }
+  .pill-badge--positive { background: var(--stan-positive-light-color); color: var(--stan-positive-dark-color); }
+  .pill-badge--dark { background: var(--stan-text-dark-color); color: var(--stan-white); }
+
+  .manage-dns-card { padding: 24px; }
+
+  .manage-dns-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+
+  .dns-table { width: 100%; }
+
+  .dns-table__row {
+    display: grid;
+    grid-template-columns: 0.9fr 1fr 1.6fr 0.6fr 32px;
+    gap: 10px;
+    align-items: center;
+    padding: 12px 0;
+    border-top: 1px solid var(--stan-gray-strike-color);
+    font-size: 13.5px;
+    color: var(--stan-text-dark-color);
+  }
+
+  .dns-table__row--head {
+    border-top: none;
+    padding-top: 0;
+    padding-bottom: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    color: var(--stan-text-light-color);
+  }
+
+  .dns-table__row strong { font-weight: 700; }
+  .dns-table__row .dns-ttl { color: var(--stan-text-light-color); }
+
+  .dns-delete-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    border: none;
+    background: none;
+    color: var(--stan-text-light-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  .dns-delete-btn:hover { background: var(--stan-negative-light-color); color: var(--stan-negative-primary-color); }
+  .dns-delete-btn svg { width: 16px; height: 16px; }
+
+  .manage-toggle-card,
+  .manage-danger-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .manage-toggle-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--stan-gray-soft-color);
+    color: var(--stan-text-dark-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .manage-toggle-icon svg { width: 17px; height: 17px; }
+  .manage-toggle-icon--danger { background: var(--stan-negative-light-color); color: var(--stan-negative-primary-color); }
+
+  .manage-toggle-text { flex: 1; min-width: 0; }
+
+  .manage-danger-card {
+    background: var(--stan-negative-light-color);
+    border-color: var(--stan-negative-primary-color);
+  }
+
+  .manage-danger-title { color: var(--stan-negative-primary-color); }
+
+  .btn-danger {
+    background: var(--stan-negative-primary-color);
+    color: var(--stan-white);
+  }
+  .btn-danger:hover { background: #e63e3e; }
+
+  /* My domains table */
+
+  .my-domains-card { padding: 0; overflow: visible; }
+
+  .card-header-row {
+    padding: 22px 24px 4px;
+  }
+
+  .card-header-row h2 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--stan-text-dark-color);
+    margin: 0;
+  }
+
+  .domains-list { padding-bottom: 8px; }
+
+  .domain-row-item {
+    padding: 18px 24px;
+    border-top: 1px solid var(--stan-gray-strike-color);
+  }
+
+  .domain-row-main {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .domain-cell .domain-name { font-weight: 700; font-size: 15px; color: var(--stan-text-dark-color); }
+  .domain-cell .expiry { font-size: 12.5px; color: var(--stan-text-light-color); margin-top: 2px; }
+
+  .status-cell { display: flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 600; white-space: nowrap; }
+
+  .status-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .status-dot.connected { background: #00c6a4; }
+  .status-dot.disconnected { background: var(--stan-gray-strike-color); }
+  .status-cell.connected-text { color: #00554b; }
+  .status-cell.disconnected-text { color: var(--stan-text-light-color); }
+
+  .domain-row-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .auto-renew-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+  }
+
+  .auto-renew-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--stan-text-dark-color);
+  }
+
+  .auto-renew-state { font-weight: 700; }
+  .auto-renew-state.on { color: #00554b; }
+  .auto-renew-state.off { color: var(--stan-text-light-color); }
+
+  .domain-row-buttons { display: flex; align-items: center; gap: 10px; }
+
+  .toggle-switch {
+    position: relative;
+    width: 36px;
+    height: 20px;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+  .toggle-switch input { opacity: 0; width: 0; height: 0; }
+  .toggle-slider {
+    position: absolute; inset: 0; background: var(--stan-gray-strike-color);
+    border-radius: 999px; cursor: pointer; transition: background .15s ease;
+  }
+  .toggle-slider::before {
+    content: ""; position: absolute; width: 16px; height: 16px; left: 2px; top: 2px;
+    background: #fff; border-radius: 50%; transition: transform .15s ease;
+    box-shadow: 0 1px 2px rgba(0,0,0,.2);
+  }
+  .toggle-switch input:checked + .toggle-slider { background: var(--stan-primary-primary-color); }
+  .toggle-switch input:checked + .toggle-slider::before { transform: translateX(16px); }
+
+  .icon-btn {
+    width: 32px; height: 32px; border-radius: 8px; border: 1px solid var(--stan-gray-strike-color);
+    background: var(--stan-white); display: flex; align-items: center; justify-content: center;
+    cursor: pointer; color: var(--stan-text-light-color); flex-shrink: 0;
+  }
+  .icon-btn:hover { background: var(--stan-gray-soft-color); }
+  .icon-btn svg { width: 16px; height: 16px; }
+
+  .dropdown-menu {
+    position: fixed;
+    background: var(--stan-white);
+    border: 1px solid var(--stan-gray-strike-color);
+    border-radius: 12px;
+    box-shadow: var(--stan-box-shadow);
+    min-width: 160px;
+    padding: 6px;
+    z-index: 1000;
+  }
+  .dropdown-menu button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    padding: 9px 10px;
+    border-radius: 8px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--stan-text-dark-color);
+    cursor: pointer;
+  }
+  .dropdown-menu button:hover { background: var(--stan-primary-light-color); color: var(--stan-primary-primary-color); }
+
+  /* Payment modal */
+
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(19, 31, 96, .35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    padding: 20px;
+  }
+
+  .modal-card {
+    background: var(--stan-white);
+    border-radius: 20px;
+    padding: 32px;
+    width: 100%;
+    max-width: 420px;
+    position: relative;
+    box-shadow: var(--stan-box-shadow);
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+    background: var(--stan-gray-soft-color);
+    color: var(--stan-text-light-color);
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .modal-close:hover { background: var(--stan-gray-strike-color); }
+
+  .modal-card h3 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--stan-text-dark-color);
+    margin: 0 0 20px;
+  }
+
+  .invoice-amount {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 34px;
+    font-weight: 800;
+    color: var(--stan-text-dark-color);
+    margin-bottom: 18px;
+  }
+
+  .invoice-meta {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 0;
+    border-top: 1px solid var(--stan-gray-strike-color);
+    border-bottom: 1px solid var(--stan-gray-strike-color);
+    margin-bottom: 16px;
+  }
+
+  .invoice-meta div { display: flex; flex-direction: column; gap: 4px; }
+  .invoice-meta span { font-size: 12px; color: var(--stan-text-light-color); }
+  .invoice-meta strong { font-size: 13.5px; color: var(--stan-text-dark-color); }
+
+  .invoice-desc {
+    font-size: 13.5px;
+    color: var(--stan-text-light-color);
+    margin-bottom: 24px;
+  }
+
+  .modal-actions { display: flex; gap: 10px; }
+  .modal-actions .btn { flex: 1; text-align: center; }
+
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+
+<section class="leftPanel">
+  <div class="brandSpace">
+    <a href="#"><img src="assets/stan-logo-text.svg" alt="Stan"></a>
+  </div>
+
+  <nav class="menus">
+    <ul>
+      <li class="menu-item">
+        <a href="#" class="menu-item-link" data-test-id="Home">
+          <svg class="menu-item-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.1661 5.1511C12.0714 5.0669 11.9286 5.0669 11.8339 5.1511L4.83391 11.3733C4.78054 11.4208 4.75 11.4888 4.75 11.5602V19C4.75 19.1381 4.86193 19.25 5 19.25H8.5C8.63807 19.25 8.75 19.1381 8.75 19V15.2222C8.75 14.2557 9.5335 13.4722 10.5 13.4722H13.5C14.4665 13.4722 15.25 14.2557 15.25 15.2222V19C15.25 19.1381 15.3619 19.25 15.5 19.25H19C19.1381 19.25 19.25 19.1381 19.25 19V11.5602C19.25 11.4888 19.2195 11.4208 19.1661 11.3733L12.1661 5.1511ZM10.8374 4.02999C11.5004 3.44061 12.4996 3.44061 13.1626 4.02999L20.1626 10.2522C20.5362 10.5843 20.75 11.0603 20.75 11.5602V19C20.75 19.9665 19.9665 20.75 19 20.75H15.5C14.5335 20.75 13.75 19.9665 13.75 19V15.2222C13.75 15.0841 13.6381 14.9722 13.5 14.9722H10.5C10.3619 14.9722 10.25 15.0841 10.25 15.2222V19C10.25 19.9665 9.4665 20.75 8.5 20.75H5C4.0335 20.75 3.25 19.9665 3.25 19V11.5602C3.25 11.0603 3.46376 10.5843 3.83736 10.2522L10.8374 4.02999Z"/>
+          </svg>
+          <span class="menu-item-title">Home</span>
+        </a>
+      </li>
+
+      <li class="menu-item">
+        <a href="#" class="menu-item-link" data-test-id="My Store">
+          <svg class="menu-item-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M17.6316 5.5H6.36842C5.33652 5.5 4.5 6.33652 4.5 7.36842C4.5 8.40032 5.33652 9.23684 6.36842 9.23684H17.6316C18.6635 9.23684 19.5 8.40032 19.5 7.36842C19.5 6.33652 18.6635 5.5 17.6316 5.5ZM6.36842 4C4.50809 4 3 5.50809 3 7.36842C3 9.22875 4.50809 10.7368 6.36842 10.7368H17.6316C19.4919 10.7368 21 9.22875 21 7.36842C21 5.50809 19.4919 4 17.6316 4H6.36842Z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M17.6316 14.7631H6.36842C5.33652 14.7631 4.5 15.5996 4.5 16.6315C4.5 17.6634 5.33652 18.5 6.36842 18.5H17.6316C18.6635 18.5 19.5 17.6634 19.5 16.6315C19.5 15.5996 18.6635 14.7631 17.6316 14.7631ZM6.36842 13.2631C4.50809 13.2631 3 14.7712 3 16.6315C3 18.4919 4.50809 20 6.36842 20H17.6316C19.4919 20 21 18.4919 21 16.6315C21 14.7712 19.4919 13.2631 17.6316 13.2631H6.36842Z"/>
+          </svg>
+          <span class="menu-item-title">My Store</span>
+        </a>
+      </li>
+
+      <li class="menu-item">
+        <a href="#" class="menu-item-link" data-test-id="Success">
+          <svg class="menu-item-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M11.6127 3.11646C11.8636 3.02986 12.1362 3.02987 12.3871 3.11646L12.5112 3.16627L12.6088 3.21998C12.8232 3.35325 12.95 3.54341 13.0229 3.66236C13.1125 3.80877 13.206 3.99884 13.3002 4.18971L15.2016 8.04127L19.4555 8.66432L19.766 8.71119C19.8653 8.72748 19.9592 8.7449 20.0424 8.7649C20.178 8.7975 20.3983 8.85989 20.5912 9.02271L20.6723 9.09986L20.7582 9.20143C20.9181 9.41349 21.0026 9.6732 20.9975 9.93873L20.9877 10.0715C20.9479 10.373 20.7779 10.591 20.6742 10.7122C20.6184 10.7774 20.552 10.8465 20.4809 10.9182L20.2582 11.1379L17.1801 14.134L17.9067 18.3674L17.9584 18.677C17.9737 18.7768 17.9858 18.8717 17.9926 18.9573C18.0036 19.0963 18.0126 19.3249 17.9174 19.5588L17.8696 19.6594C17.7199 19.9349 17.4688 20.1385 17.1723 20.2288L17.0424 20.26C16.7437 20.3153 16.4846 20.2215 16.3373 20.1604C16.2581 20.1275 16.1716 20.0857 16.0815 20.0403L15.8032 19.8958L11.9994 17.8958L8.19671 19.8958C8.0083 19.9948 7.82109 20.0946 7.66253 20.1604C7.53353 20.2139 7.31878 20.293 7.06683 20.2747L6.95745 20.26C6.64928 20.2029 6.37813 20.0267 6.20061 19.7727L6.1303 19.6594C5.98511 19.3921 5.99467 19.1163 6.00726 18.9573C6.02081 18.7861 6.0572 18.5773 6.09319 18.3674L6.81878 14.134L3.74261 11.1379C3.59021 10.9895 3.43719 10.8426 3.32561 10.7122C3.23495 10.6062 3.09428 10.426 3.03362 10.1809L3.01214 10.0715C2.96532 9.71673 3.08155 9.35976 3.32757 9.09986L3.40862 9.02271C3.60154 8.85988 3.82187 8.7975 3.95745 8.7649C4.12428 8.72481 4.33393 8.69507 4.54436 8.66432L8.79729 8.04127L10.6996 4.18971L10.8403 3.90943C10.8865 3.81978 10.9322 3.73554 10.977 3.66236C11.0603 3.52635 11.2143 3.29712 11.4887 3.16627L11.6127 3.11646Z"/>
+          </svg>
+          <span class="menu-item-title">Success</span>
+        </a>
+      </li>
+
+      <li class="menu-item">
+        <a href="#" class="menu-item-link" data-test-id="Income">
+          <svg class="menu-item-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M17.9658 8.7868H5.96582C5.13739 8.7868 4.46582 9.45838 4.46582 10.2868V17.5C4.46582 18.3284 5.13739 19 5.96582 19H17.9658C18.7942 19 19.4658 18.3284 19.4658 17.5V10.2868C19.4658 9.45838 18.7942 8.7868 17.9658 8.7868ZM5.96582 7.2868C4.30897 7.2868 2.96582 8.62995 2.96582 10.2868V17.5C2.96582 19.1569 4.30897 20.5 5.96582 20.5H17.9658C19.6227 20.5 20.9658 19.1569 20.9658 17.5V10.2868C20.9658 8.62995 19.6227 7.2868 17.9658 7.2868H5.96582Z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M14.838 5.69323C14.5409 5.05155 13.7712 4.78385 13.14 5.10272L4.92846 9.25144C4.55875 9.43823 4.10762 9.28994 3.92084 8.92023C3.73405 8.55052 3.88234 8.0994 4.25204 7.91261L12.4636 3.76389C13.8521 3.06238 15.5456 3.65131 16.1992 5.06301L17.4473 7.75871C17.6213 8.13459 17.4577 8.58039 17.0818 8.75442C16.706 8.92845 16.2602 8.76482 16.0861 8.38894L14.838 5.69323Z"/>
+          </svg>
+          <span class="menu-item-title">Income</span>
+        </a>
+      </li>
+
+      <li class="menu-item">
+        <a href="#" class="menu-item-link" data-test-id="Analytics">
+          <svg class="menu-item-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M6 9.95093C6.55228 9.95093 7 10.3986 7 10.9509V17.9995C7 18.5518 6.55228 18.9995 6 18.9995C5.44772 18.9995 5 18.5518 5 17.9995V10.9509C5 10.3986 5.44772 9.95093 6 9.95093Z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 5C12.5523 5 13 5.44772 13 6L13 17.9994C13 18.5517 12.5523 18.9994 12 18.9994C11.4477 18.9994 11 18.5517 11 17.9994L11 6C11 5.44772 11.4477 5 12 5Z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M18 12.9723C18.5523 12.9723 19 13.42 19 13.9723L19 18.0001C19 18.5523 18.5523 19.0001 18 19.0001C17.4477 19.0001 17 18.5523 17 18.0001L17 13.9723C17 13.42 17.4477 12.9723 18 12.9723Z"/>
+          </svg>
+          <span class="menu-item-title">Analytics</span>
+        </a>
+      </li>
+
+      <li class="menu-item">
+        <a href="#" class="menu-item-link active" data-test-id="Domains">
+          <svg class="menu-item-icon stroke" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="8.25"/>
+            <path d="M3.75 12h16.5"/>
+            <path d="M12 3.75c2.2 2.34 3.45 5.24 3.45 8.25S14.2 17.91 12 20.25C9.8 17.91 8.55 15.01 8.55 12S9.8 6.09 12 3.75Z"/>
+          </svg>
+          <span class="menu-item-title">Domains</span>
+          <span class="menu-item-badge">New</span>
+        </a>
+      </li>
+
+      <li class="menu-item">
+        <a href="#" class="menu-item-link" data-test-id="Customers">
+          <svg class="menu-item-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 9.64365L10.7394 7.68919C9.84375 6.30044 8.23958 5.75791 6.89186 6.06124C5.6681 6.33667 4.5 7.35338 4.5 9.59381C4.5 11.6373 6.0378 14.9228 11.7894 18.606C11.9168 18.6876 12.0832 18.6876 12.2106 18.606C17.9622 14.9228 19.5 11.6373 19.5 9.59381C19.5 7.37357 18.3351 6.35226 17.1052 6.07285C15.7551 5.76614 14.154 6.304 13.2606 7.68919L12 9.64365ZM10.9813 5.71241C8.07523 3.24784 3 4.44853 3 9.59381C3 12.3969 5.06044 16.0781 10.9805 19.8692C11.601 20.2665 12.399 20.2665 13.0195 19.8692C18.9396 16.0781 21 12.3969 21 9.59381C21 4.47777 15.9254 3.25472 13.0193 5.71312C12.6363 6.03705 12.2911 6.4249 12 6.87618C11.7091 6.42511 11.364 6.03698 10.9813 5.71241Z"/>
+          </svg>
+          <span class="menu-item-title">Customers</span>
+        </a>
+      </li>
+
+      <li class="menu-item">
+        <a href="#" class="menu-item-link" data-test-id="AutoDM">
+          <svg class="menu-item-icon" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M15.9892 3.26186C16.1627 3.40052 16.2495 3.6208 16.2174 3.84051L14.2661 17.1738C14.2287 17.4298 14.0374 17.6363 13.7849 17.6931C13.5325 17.7499 13.2712 17.6453 13.1277 17.43L9.33608 11.7426L2.69352 9.21211C2.45151 9.11992 2.29143 8.88803 2.29102 8.62905C2.2906 8.37008 2.44994 8.13768 2.69165 8.04472L15.3746 3.16667C15.5818 3.08695 15.8158 3.12319 15.9892 3.26186ZM4.66433 8.62526L9.96778 10.6456C10.0892 10.6919 10.1932 10.7749 10.2653 10.883L13.265 15.3825L14.8258 4.71701L4.66433 8.62526Z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.4888 7.85946C12.7509 8.0841 12.7812 8.47866 12.5566 8.74074L10.0566 11.6574C9.83194 11.9195 9.43738 11.9498 9.1753 11.7252C8.91322 11.5006 8.88287 11.106 9.10751 10.8439L11.6075 7.92725C11.8321 7.66517 12.2267 7.63482 12.4888 7.85946Z"/>
+          </svg>
+          <span class="menu-item-title">AutoDM</span>
+        </a>
+      </li>
+
+      <li class="menu-item">
+        <a href="#" class="menu-item-link" data-test-id="More">
+          <svg class="menu-item-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 4.75C12.4142 4.75 12.75 5.08579 12.75 5.5V18.5C12.75 18.9142 12.4142 19.25 12 19.25C11.5858 19.25 11.25 18.9142 11.25 18.5V5.5C11.25 5.08579 11.5858 4.75 12 4.75Z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M4.75 12C4.75 11.5858 5.08579 11.25 5.5 11.25H18.5C18.9142 11.25 19.25 11.5858 19.25 12C19.25 12.4142 18.9142 12.75 18.5 12.75H5.5C5.08579 12.75 4.75 12.4142 4.75 12Z"/>
+          </svg>
+          <span class="menu-item-title">More</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="sidebar-divider"></div>
+    <ul>
+      <li class="menu-item">
+        <a href="#" class="menu-item-link" data-test-id="Settings">
+          <svg class="menu-item-icon" viewBox="0 0 18 20" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9.07195 13.1631C8.1887 13.1631 7.35345 12.8175 6.72942 12.1935C6.10539 11.5694 5.75977 10.7342 5.75977 9.85092C5.75977 8.96767 6.10539 8.13243 6.72942 7.50839C7.97749 6.26032 10.1664 6.26032 11.4145 7.50839C12.0385 8.13243 12.3841 8.96767 12.3841 9.85092C12.3841 10.7342 12.0385 11.5694 11.4145 12.1935C10.7904 12.8175 9.9552 13.1631 9.07195 13.1631ZM9.07195 7.97882C8.57272 7.97882 8.1023 8.17083 7.74708 8.52605C7.39186 8.88127 7.19985 9.3517 7.19985 9.85092C7.19985 10.3502 7.39186 10.8206 7.74708 11.1758C8.44791 11.8766 9.68638 11.8862 10.3968 11.1758C10.752 10.8206 10.9441 10.3502 10.9441 9.85092C10.9441 9.3517 10.752 8.88127 10.3968 8.52605C10.0416 8.17083 9.57118 7.97882 9.07195 7.97882Z"/>
+            <path d="M10.3489 19.2114H7.64152C6.86388 19.2114 6.19184 18.6258 6.07664 17.8578L5.86543 16.4081C5.86543 16.3505 5.78862 16.3121 5.75982 16.2929C5.51021 16.1681 5.26059 16.0241 5.03018 15.8609C5.01098 15.8513 4.94377 15.8128 4.88617 15.8321L3.5229 16.3793C2.79326 16.6673 1.94841 16.3793 1.56439 15.6976L0.210712 13.3647C-0.18291 12.6831 -0.0101007 11.8094 0.604333 11.3294L1.814 10.3789C1.7948 10.2061 1.7948 10.0333 1.7948 9.85092C1.7948 9.66851 1.7948 9.4957 1.814 9.32289L0.604333 8.37244C-0.0101007 7.89241 -0.18291 7.01876 0.210712 6.33712L1.56439 3.99459C1.95801 3.32256 2.79326 3.02494 3.5229 3.32256L4.88617 3.86979C4.94377 3.89859 5.02058 3.85059 5.03978 3.84099C5.27019 3.68738 5.51021 3.54337 5.76942 3.41856C5.78862 3.40896 5.86543 3.37056 5.87503 3.30336L6.08624 1.85368C6.19184 1.07603 6.87348 0.5 7.65112 0.5H10.3585C11.1457 0.5 11.8178 1.08563 11.9234 1.86328L12.1346 3.31296C12.1346 3.38016 12.2114 3.41856 12.2306 3.42816C12.4802 3.55297 12.7298 3.69698 12.9602 3.85059C12.9794 3.86019 13.0562 3.89859 13.1138 3.87939L14.4771 3.33216C15.2067 3.04414 16.042 3.33216 16.4356 4.0138L17.7893 6.35633C18.1829 7.02836 18.0101 7.91161 17.3957 8.39164L16.186 9.34209C16.1956 9.5149 16.2052 9.68771 16.2052 9.87012C16.2052 10.0525 16.2052 10.2253 16.186 10.3981L17.3957 11.3486C18.0101 11.8286 18.1829 12.7119 17.7893 13.3839L16.4356 15.7264C16.042 16.4081 15.2067 16.6961 14.4771 16.4081L13.1138 15.8609C13.0466 15.8321 12.9794 15.8801 12.9602 15.8897C12.7298 16.0433 12.4802 16.1873 12.2306 16.3121C12.2114 16.3217 12.1346 16.3601 12.125 16.4273L11.9138 17.877C11.8082 18.645 11.1361 19.2306 10.3489 19.2306V19.2114Z"/>
+          </svg>
+          <span class="menu-item-title">Settings</span>
+        </a>
+      </li>
+    </ul>
+    <a href="#" class="profile-row">
+      <img src="assets/abigail/profile.webp" alt="">
+      <span>abigailpeugh</span>
+    </a>
+  </div>
+</section>
+
+<main class="main">
+  <div class="page-header">
+    <h1>Domains</h1>
+    <div class="store-url">
+      <span id="storeUrlText">stan.store/abigailpeugh</span>
+      <button type="button" aria-label="Copy link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="9" y="9" width="12" height="12" rx="2"/>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="domains-page">
+
+    <!-- My Domains table (full width) -->
+    <section id="myDomainsSection" class="card my-domains-card" hidden>
+      <div class="card-header-row"><h2>My domains</h2></div>
+      <div class="domains-list" id="domainsTableBody"></div>
+    </section>
+
+    <!-- Connect a domain bought elsewhere -->
+    <section id="connectDomainSection" class="card connect-domain-card">
+      <div class="connect-domain-text">
+        <h3 class="connect-domain-title">Connect a domain</h3>
+        <p class="connect-domain-subtitle">Already own a domain? Point it to your Stan store in a few minutes.</p>
+      </div>
+      <button type="button" class="btn btn-outline connect-domain-btn">Connect domain</button>
+    </section>
+
+    <!-- Search hero / success + live site preview -->
+    <div class="hero-row" id="heroRow">
+      <div class="hero-row-main">
+        <section id="searchHero" class="card search-hero-card">
+          <h2 id="searchHeadline">Find your name. <span>⚡</span></h2>
+          <p class="search-subline">More clicks, more sales</p>
+          <form id="searchForm" class="search-form">
+            <div class="search-input-wrap">
+              <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="7"/>
+                <path d="M21 21l-4.35-4.35"/>
+              </svg>
+              <input id="searchInput" type="text" placeholder="e.g. abigail" autocomplete="off">
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+          </form>
+          <div class="search-tips">
+            <span class="tip-chip">Keep it under 15 characters</span>
+            <span class="tip-chip">Avoid hyphens &amp; numbers</span>
+            <span class="tip-chip">Start with your brand name</span>
+          </div>
+        </section>
+
+        <!-- Success -->
+        <section id="successSection" class="card success-card" hidden>
+          <div class="success-header">
+            <div class="success-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            </div>
+            <h2>Domain registered!</h2>
+            <p id="successDomainLine"></p>
+          </div>
+          <div class="success-body">
+            <p id="successMessage"></p>
+            <button class="btn btn-primary" id="myDomainsCtaBtn">My domains →</button>
+          </div>
+        </section>
+      </div>
+
+      <section id="phonePreviewSection" class="phone-preview-section" hidden>
+        <div class="phone-frame">
+          <div class="phone-top-bar" id="phoneDomainLabel"></div>
+          <iframe class="phone-iframe" src="assets/abigail/preview.html" title="Site preview"></iframe>
+        </div>
+      </section>
+    </div>
+
+    <!-- Results -->
+    <section id="resultsSection" hidden>
+      <div class="results-count">Top results</div>
+      <div class="hero-group" id="heroGroup"></div>
+
+      <div class="card other-domains-card">
+        <div class="card-label">Other domains</div>
+        <div id="otherDomainsList"></div>
+      </div>
+    </section>
+
+    <!-- Registration -->
+    <section id="registrationSection" class="card" hidden>
+      <div class="eyebrow">Registering</div>
+      <div class="reg-domain-row">
+        <span class="domain-name" id="regDomainName"></span>
+        <span class="price-chip" id="regPriceChip"></span>
+      </div>
+      <form id="registrationForm">
+        <div class="eyebrow eyebrow--section">Registrant details</div>
+        <div class="form-row">
+          <div class="form-field">
+            <label for="firstName">First name</label>
+            <input id="firstName" type="text" value="Abigail" required>
+          </div>
+          <div class="form-field">
+            <label for="lastName">Last name</label>
+            <input id="lastName" type="text" value="Peugh" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label for="regEmail">Email</label>
+            <input id="regEmail" type="email" value="hello@abigailpeugh.com" required>
+          </div>
+          <div class="form-field">
+            <label for="regPhone">Phone</label>
+            <input id="regPhone" type="tel" value="+1 (555) 019-2842" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field" style="flex: 2;">
+            <label for="regAddress">Address</label>
+            <input id="regAddress" type="text" value="128 Larkspur Lane" required>
+          </div>
+          <div class="form-field">
+            <label for="regCity">City</label>
+            <input id="regCity" type="text" value="Austin" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label for="regState">State / Region</label>
+            <input id="regState" type="text" value="TX" required>
+          </div>
+          <div class="form-field">
+            <label for="regPostal">Postal code</label>
+            <input id="regPostal" type="text" value="73301" required>
+          </div>
+          <div class="form-field">
+            <label for="regCountry">Country</label>
+            <select id="regCountry" required>
+              <option value="United States" selected>United States</option>
+              <option value="Canada">Canada</option>
+              <option value="United Kingdom">United Kingdom</option>
+              <option value="Australia">Australia</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="auto-renew-card">
+          <div class="auto-renew-card__text">
+            <div class="auto-renew-card__title">Auto-renew</div>
+            <div class="auto-renew-card__subtitle">Keeps your domain active. Cancel anytime.</div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="regAutoRenew" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="consent-row">
+          <input type="checkbox" id="legalConsent" required>
+          <label for="legalConsent">I agree to create a domain account with Namify and accept their <a href="#" target="_blank" rel="noopener">legal terms</a>.</label>
+        </div>
+        <div class="reg-actions">
+          <button type="button" class="btn btn-outline" id="cancelRegBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="regSubmitBtn">Register domain</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Manage domain -->
+    <section id="manageDomainSection" hidden>
+      <button type="button" class="btn-text back-link" id="manageBackBtn">&larr; Back to My domains</button>
+
+      <div class="manage-header">
+        <h2>Manage domain</h2>
+        <p class="search-subline">Control DNS, renewal, and ownership for your domain.</p>
+      </div>
+
+      <div class="card manage-info-card">
+        <div class="manage-info-icon">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="8.25"/>
+            <path d="M3.75 12h16.5"/>
+            <path d="M12 3.75c2.2 2.34 3.45 5.24 3.45 8.25S14.2 17.91 12 20.25C9.8 17.91 8.55 15.01 8.55 12S9.8 6.09 12 3.75Z"/>
+          </svg>
+        </div>
+        <div class="manage-info-text">
+          <div class="manage-info-row">
+            <span class="domain-name" id="manageDomainName"></span>
+            <span class="pill-badge pill-badge--positive">✓ Active</span>
+            <span class="pill-badge pill-badge--dark" id="managePrimaryBadge">Primary</span>
+          </div>
+          <p class="manage-info-subtitle" id="manageInfoSubtitle"></p>
+        </div>
+      </div>
+
+      <div class="card manage-dns-card">
+        <div class="manage-dns-header">
+          <span class="card-label" style="padding: 0;">DNS records</span>
+          <button type="button" class="btn-text" id="addRecordBtn">+ Add record</button>
+        </div>
+        <div class="dns-table">
+          <div class="dns-table__row dns-table__row--head">
+            <span>Type</span><span>Name</span><span>Value</span><span>TTL</span><span></span>
+          </div>
+          <div id="dnsRecordsBody"></div>
+        </div>
+      </div>
+
+      <div class="card manage-toggle-card">
+        <div class="manage-toggle-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg>
+        </div>
+        <div class="manage-toggle-text">
+          <div class="auto-renew-card__title">Auto-renew</div>
+          <div class="auto-renew-card__subtitle" id="manageAutoRenewSubtitle"></div>
+        </div>
+        <label class="toggle-switch">
+          <input type="checkbox" id="manageAutoRenewToggle">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+
+      <div class="card manage-toggle-card">
+        <div class="manage-toggle-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+        </div>
+        <div class="manage-toggle-text">
+          <div class="auto-renew-card__title">Transfer domain</div>
+          <div class="auto-renew-card__subtitle" id="manageTransferSubtitle"></div>
+        </div>
+        <button type="button" class="btn btn-outline btn-sm">Transfer</button>
+      </div>
+
+      <div class="card manage-danger-card">
+        <div class="manage-toggle-icon manage-toggle-icon--danger">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M10 11v6M14 11v6"/><path d="M6 7l1 13a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-13"/><path d="M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"/></svg>
+        </div>
+        <div class="manage-toggle-text">
+          <div class="auto-renew-card__title manage-danger-title">Delete domain</div>
+          <div class="auto-renew-card__subtitle" id="manageDeleteSubtitle"></div>
+        </div>
+        <button type="button" class="btn btn-danger btn-sm">Delete</button>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<!-- Payment modal -->
+<div id="paymentModal" class="modal-backdrop" hidden>
+  <div class="modal-card">
+    <button class="modal-close" id="modalCloseBtn" aria-label="Close">&times;</button>
+    <h3 id="invoiceTitle">Invoice from Stan</h3>
+    <div class="invoice-amount" id="invoiceAmount"></div>
+    <div class="invoice-meta">
+      <div><span>Due date</span><strong id="invoiceDue"></strong></div>
+      <div><span>Invoice number</span><strong id="invoiceNumber"></strong></div>
+    </div>
+    <div class="invoice-desc" id="invoiceDesc"></div>
+
+    <form id="paymentForm">
+      <div class="eyebrow eyebrow--section">Payment details</div>
+      <div class="form-row">
+        <div class="form-field">
+          <label for="cardName">Name on card</label>
+          <input id="cardName" type="text" value="Abigail Peugh" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label for="cardNumber">Card number</label>
+          <input id="cardNumber" type="text" inputmode="numeric" autocomplete="cc-number" placeholder="1234 1234 1234 1234" maxlength="19" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label for="cardExpiry">Expiry</label>
+          <input id="cardExpiry" type="text" inputmode="numeric" autocomplete="cc-exp" placeholder="MM/YY" maxlength="5" required>
+        </div>
+        <div class="form-field">
+          <label for="cardCvc">CVC</label>
+          <input id="cardCvc" type="text" inputmode="numeric" autocomplete="cc-csc" placeholder="123" maxlength="4" required>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-outline" id="downloadInvoiceBtn">Download invoice</button>
+        <button type="submit" class="btn btn-primary" id="payNowBtn">Pay now</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="rowDropdownMenu" class="dropdown-menu" hidden>
+  <button type="button" id="makePrimaryBtn">Make primary</button>
+</div>
+
+<script>
+(function () {
+  var tlds = [
+    { tld: '.store',   hero: true,  free: true,  renewal: 32 },
+    { tld: '.com',     hero: false, free: false, price: 14 },
+    { tld: '.tech',    hero: false, free: true,  renewal: 45 },
+    { tld: '.online',  hero: false, free: true,  renewal: 26 },
+    { tld: '.site',    hero: false, free: true,  renewal: 24 },
+    { tld: '.net',     hero: false, free: false, price: 17 },
+    { tld: '.org',     hero: false, free: false, price: 16 },
+    { tld: '.ai',      hero: false, free: false, price: 79 },
+    { tld: '.io',      hero: false, free: false, price: 55 },
+    { tld: '.co',      hero: false, free: false, price: 30 }
+  ];
+
+  var DEFAULT_STORE_URL = 'stan.store/abigailpeugh';
+
+  var state = {
+    hasRegisteredAny: false,
+    hasClaimedFree: false,
+    domains: [],          // { domain, tld, price, free, renewal, registeredAt, expiry, autoRenew, connected }
+    pendingRegistration: null,
+    pendingPayment: null,  // { type: 'register' | 'renew', index }
+    openDropdown: null
+  };
+
+  var els = {
+    searchHero: document.getElementById('searchHero'),
+    searchHeadline: document.getElementById('searchHeadline'),
+    searchForm: document.getElementById('searchForm'),
+    searchInput: document.getElementById('searchInput'),
+    resultsSection: document.getElementById('resultsSection'),
+    heroGroup: document.getElementById('heroGroup'),
+    otherDomainsList: document.getElementById('otherDomainsList'),
+    registrationSection: document.getElementById('registrationSection'),
+    regDomainName: document.getElementById('regDomainName'),
+    regPriceChip: document.getElementById('regPriceChip'),
+    registrationForm: document.getElementById('registrationForm'),
+    legalConsent: document.getElementById('legalConsent'),
+    regAutoRenew: document.getElementById('regAutoRenew'),
+    regSubmitBtn: document.getElementById('regSubmitBtn'),
+    cancelRegBtn: document.getElementById('cancelRegBtn'),
+    successSection: document.getElementById('successSection'),
+    successDomainLine: document.getElementById('successDomainLine'),
+    successMessage: document.getElementById('successMessage'),
+    myDomainsCtaBtn: document.getElementById('myDomainsCtaBtn'),
+    myDomainsSection: document.getElementById('myDomainsSection'),
+    domainsTableBody: document.getElementById('domainsTableBody'),
+    storeUrlText: document.getElementById('storeUrlText'),
+    phonePreviewSection: document.getElementById('phonePreviewSection'),
+    phoneDomainLabel: document.getElementById('phoneDomainLabel'),
+    paymentModal: document.getElementById('paymentModal'),
+    invoiceTitle: document.getElementById('invoiceTitle'),
+    invoiceAmount: document.getElementById('invoiceAmount'),
+    invoiceDue: document.getElementById('invoiceDue'),
+    invoiceNumber: document.getElementById('invoiceNumber'),
+    invoiceDesc: document.getElementById('invoiceDesc'),
+    modalCloseBtn: document.getElementById('modalCloseBtn'),
+    paymentForm: document.getElementById('paymentForm'),
+    payNowBtn: document.getElementById('payNowBtn'),
+    downloadInvoiceBtn: document.getElementById('downloadInvoiceBtn'),
+    cardName: document.getElementById('cardName'),
+    cardNumber: document.getElementById('cardNumber'),
+    cardExpiry: document.getElementById('cardExpiry'),
+    cardCvc: document.getElementById('cardCvc'),
+    rowDropdownMenu: document.getElementById('rowDropdownMenu'),
+    makePrimaryBtn: document.getElementById('makePrimaryBtn'),
+    connectDomainSection: document.getElementById('connectDomainSection'),
+    heroRow: document.getElementById('heroRow'),
+    manageDomainSection: document.getElementById('manageDomainSection'),
+    manageBackBtn: document.getElementById('manageBackBtn'),
+    manageDomainName: document.getElementById('manageDomainName'),
+    managePrimaryBadge: document.getElementById('managePrimaryBadge'),
+    manageInfoSubtitle: document.getElementById('manageInfoSubtitle'),
+    dnsRecordsBody: document.getElementById('dnsRecordsBody'),
+    manageAutoRenewSubtitle: document.getElementById('manageAutoRenewSubtitle'),
+    manageAutoRenewToggle: document.getElementById('manageAutoRenewToggle'),
+    manageTransferSubtitle: document.getElementById('manageTransferSubtitle'),
+    manageDeleteSubtitle: document.getElementById('manageDeleteSubtitle')
+  };
+
+  function sanitizeQuery(raw) {
+    var cleaned = (raw || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+    return cleaned || 'yourbrand';
+  }
+
+  function money(n) { return '$' + n.toFixed(2).replace(/\.00$/, ''); }
+
+  function formatDate(d) {
+    return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+  }
+
+  function addYears(date, years) {
+    var d = new Date(date.getTime());
+    d.setFullYear(d.getFullYear() + years);
+    return d;
+  }
+
+  function standardPrice(t) {
+    return t.price !== undefined ? t.price : t.renewal;
+  }
+
+  function heroCardHTML(query, t) {
+    var domain = query + t.tld;
+    var isFree = t.free && !state.hasClaimedFree;
+    var price = isFree ? t.renewal : standardPrice(t);
+    var priceLine = isFree
+      ? '<span class="price-line">then <strong>$' + t.renewal + '</strong>/year after</span>'
+      : '<span class="price-line"><strong>$' + price + '</strong>/yr</span>';
+    var badge = isFree ? '<span class="free-badge">1<sup>st</sup> year free</span>' : '';
+    return (
+      '<div class="hero-card">' +
+        '<div class="hero-card__info">' +
+          badge +
+          '<span class="domain-name">' + domain + '</span>' +
+        '</div>' +
+        '<div class="hero-card__cta">' +
+          priceLine +
+          '<button class="btn btn-primary btn-sm" data-domain="' + domain + '" data-tld="' + t.tld + '" data-free="' + isFree + '" data-price="' + price + '">Register</button>' +
+        '</div>' +
+      '</div>'
+    );
+  }
+
+  function otherRowHTML(query, t) {
+    var domain = query + t.tld;
+    var isFree = t.free && !state.hasClaimedFree;
+    var badge = isFree ? '<span class="free-badge">1<sup>st</sup> year free</span>' : '';
+    var price = isFree ? t.renewal : standardPrice(t);
+    var priceLine = isFree
+      ? '<span class="price-line">then <strong>$' + t.renewal + '</strong>/year after</span>'
+      : '<span class="price-line"><strong>$' + price + '/yr</strong></span>';
+    return (
+      '<div class="domain-row">' +
+        '<div class="domain-row-left"><span class="domain-name">' + domain + '</span>' + badge + '</div>' +
+        '<div class="domain-row-right">' +
+          priceLine +
+          '<button class="btn-text" data-domain="' + domain + '" data-tld="' + t.tld + '" data-free="' + isFree + '" data-price="' + price + '">Register</button>' +
+        '</div>' +
+      '</div>'
+    );
+  }
+
+  function renderResults(rawQuery) {
+    var query = sanitizeQuery(rawQuery);
+    var heroTlds = tlds.filter(function (t) { return t.hero; });
+    var otherTlds = tlds.filter(function (t) { return !t.hero; });
+
+    els.heroGroup.innerHTML = heroTlds.map(function (t) { return heroCardHTML(query, t); }).join('');
+    els.otherDomainsList.innerHTML = otherTlds.map(function (t) { return otherRowHTML(query, t); }).join('');
+
+    els.resultsSection.hidden = false;
+  }
+
+  function updateSearchHeadline() {
+    els.searchHeadline.innerHTML = state.hasRegisteredAny
+      ? 'Find another domain. <span>⚡</span>'
+      : 'Find your name. <span>⚡</span>';
+  }
+
+  els.searchForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    renderResults(els.searchInput.value);
+  });
+
+  function onRegisterClick(e) {
+    var btn = e.target.closest('button[data-domain]');
+    if (!btn) return;
+    var domain = btn.getAttribute('data-domain');
+    var tld = btn.getAttribute('data-tld');
+    var free = btn.getAttribute('data-free') === 'true';
+    var price = parseFloat(btn.getAttribute('data-price'));
+
+    state.pendingRegistration = { domain: domain, tld: tld, free: free, price: price };
+
+    els.regDomainName.textContent = domain;
+    els.regPriceChip.textContent = free ? 'Free for first year' : money(price) + '/yr';
+    els.regSubmitBtn.textContent = free ? 'Register domain' : 'Pay & Register — ' + money(price);
+    els.legalConsent.checked = false;
+    els.regAutoRenew.checked = true;
+
+    els.searchHero.hidden = true;
+    els.resultsSection.hidden = true;
+    els.registrationSection.hidden = false;
+  }
+
+  els.heroGroup.addEventListener('click', onRegisterClick);
+  els.otherDomainsList.addEventListener('click', onRegisterClick);
+
+  els.cancelRegBtn.addEventListener('click', function () {
+    els.registrationSection.hidden = true;
+    els.searchHero.hidden = false;
+    els.resultsSection.hidden = false;
+  });
+
+  els.registrationForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!els.legalConsent.checked) return;
+    var reg = state.pendingRegistration;
+    if (!reg) return;
+
+    if (reg.free) {
+      completeRegistration(reg);
+    } else {
+      openPaymentModal({ type: 'register', reg: reg });
+    }
+  });
+
+  function completeRegistration(reg) {
+    var now = new Date();
+    var isFirst = state.domains.length === 0;
+    var record = {
+      domain: reg.domain,
+      tld: reg.tld,
+      free: reg.free,
+      price: reg.price,
+      registeredAt: now,
+      expiry: addYears(now, 1),
+      autoRenew: els.regAutoRenew.checked,
+      connected: isFirst
+    };
+    state.domains.push(record);
+    state.hasRegisteredAny = true;
+    if (record.free) state.hasClaimedFree = true;
+
+    renderDomainsTable();
+    updateSearchHeadline();
+    var primary = refreshPrimaryDomainLabels();
+    els.phonePreviewSection.hidden = !primary;
+
+    els.registrationSection.hidden = true;
+    els.successDomainLine.textContent = reg.domain + ' is now yours';
+    els.successMessage.innerHTML = isFirst
+      ? 'Your domain is registered and auto connected to your Stan store. Visit <a href="#" id="successMyDomainsLink">My domains</a> to manage your domain.'
+      : 'Your domain is registered. Visit <a href="#" id="successMyDomainsLink">My domains</a> to make it your primary domain.';
+    els.successSection.hidden = false;
+
+    var link = document.getElementById('successMyDomainsLink');
+    if (link) link.addEventListener('click', function (e) { e.preventDefault(); goToMyDomains(); });
+  }
+
+  function goToMyDomains() {
+    els.successSection.hidden = true;
+    els.phonePreviewSection.hidden = true;
+    els.searchHero.hidden = false;
+    els.resultsSection.hidden = true;
+    els.searchInput.value = '';
+    els.myDomainsSection.hidden = false;
+  }
+
+  els.myDomainsCtaBtn.addEventListener('click', goToMyDomains);
+
+  // ---- Payment modal ----
+
+  function openPaymentModal(payload) {
+    state.pendingPayment = payload;
+    var reg = payload.reg;
+    var domain = reg.domain;
+    var price = reg.price;
+
+    els.invoiceTitle.textContent = 'Invoice from Stan';
+    els.invoiceAmount.textContent = money(price);
+    var due = new Date();
+    due.setDate(due.getDate() + 7);
+    els.invoiceDue.textContent = formatDate(due);
+    els.invoiceNumber.textContent = 'INV-' + Math.floor(100000 + Math.random() * 900000);
+    els.invoiceDesc.textContent = payload.type === 'renew'
+      ? 'Domain renewal for ' + domain
+      : 'Domain registration for ' + domain;
+
+    els.payNowBtn.textContent = 'Pay ' + money(price) + ' now';
+    var firstNameField = document.getElementById('firstName');
+    var lastNameField = document.getElementById('lastName');
+    els.cardName.value = firstNameField && lastNameField
+      ? (firstNameField.value + ' ' + lastNameField.value).trim()
+      : 'Abigail Peugh';
+    els.cardNumber.value = '';
+    els.cardExpiry.value = '';
+    els.cardCvc.value = '';
+
+    els.paymentModal.hidden = false;
+  }
+
+  function closePaymentModal() {
+    els.paymentModal.hidden = true;
+    state.pendingPayment = null;
+  }
+
+  els.modalCloseBtn.addEventListener('click', closePaymentModal);
+  els.paymentModal.addEventListener('click', function (e) {
+    if (e.target === els.paymentModal) closePaymentModal();
+  });
+
+  els.downloadInvoiceBtn.addEventListener('click', function () {
+    window.print();
+  });
+
+  els.cardNumber.addEventListener('input', function () {
+    var digits = els.cardNumber.value.replace(/\D/g, '').slice(0, 16);
+    els.cardNumber.value = digits.replace(/(.{4})/g, '$1 ').trim();
+  });
+
+  els.cardExpiry.addEventListener('input', function () {
+    var digits = els.cardExpiry.value.replace(/\D/g, '').slice(0, 4);
+    els.cardExpiry.value = digits.length > 2 ? digits.slice(0, 2) + '/' + digits.slice(2) : digits;
+  });
+
+  els.cardCvc.addEventListener('input', function () {
+    els.cardCvc.value = els.cardCvc.value.replace(/\D/g, '').slice(0, 4);
+  });
+
+  els.paymentForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var payload = state.pendingPayment;
+    if (!payload) return;
+
+    if (payload.type === 'register') {
+      completeRegistration(payload.reg);
+    } else if (payload.type === 'renew') {
+      var record = state.domains[payload.index];
+      record.expiry = addYears(record.expiry, 1);
+      renderDomainsTable();
+    }
+    closePaymentModal();
+  });
+
+  // ---- My domains table ----
+
+  function renderDomainsTable() {
+    els.domainsTableBody.innerHTML = state.domains.map(function (d, i) {
+      var statusClass = d.connected ? 'connected' : 'disconnected';
+      var statusLabel = d.connected ? 'Connected' : 'Not connected';
+      var autoRenewState = d.autoRenew ? 'on' : 'off';
+      var autoRenewLabel = d.autoRenew ? 'On' : 'Off';
+
+      return (
+        '<div class="domain-row-item">' +
+          '<div class="domain-row-main">' +
+            '<div class="domain-cell">' +
+              '<div class="domain-name">' + d.domain + '</div>' +
+              '<div class="expiry">Expiry ' + formatDate(d.expiry) + '</div>' +
+            '</div>' +
+            '<div class="status-cell ' + statusClass + '-text">' +
+              '<span class="status-dot ' + statusClass + '"></span>' + statusLabel +
+            '</div>' +
+          '</div>' +
+          '<div class="domain-row-actions">' +
+            '<label class="auto-renew-control">' +
+              '<span class="toggle-switch">' +
+                '<input type="checkbox" data-action="toggle-renew" data-index="' + i + '" ' + (d.autoRenew ? 'checked' : '') + '>' +
+                '<span class="toggle-slider"></span>' +
+              '</span>' +
+              '<span class="auto-renew-label">Auto-renew <span class="auto-renew-state ' + autoRenewState + '">' + autoRenewLabel + '</span></span>' +
+            '</label>' +
+            '<div class="domain-row-buttons">' +
+              '<button class="btn btn-primary btn-sm" data-action="manage" data-index="' + i + '">Manage domain</button>' +
+              '<button class="btn btn-outline btn-sm" data-action="renew" data-index="' + i + '">Renew</button>' +
+              '<button class="icon-btn" data-action="menu" data-index="' + i + '" aria-label="More actions">' +
+                '<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="12" cy="19" r="1.6"/></svg>' +
+              '</button>' +
+            '</div>' +
+          '</div>' +
+        '</div>'
+      );
+    }).join('');
+  }
+
+  var dropdownTargetIndex = null;
+
+  function openRowDropdown(button, index) {
+    dropdownTargetIndex = index;
+    els.rowDropdownMenu.hidden = false;
+    var rect = button.getBoundingClientRect();
+    var menuHeight = els.rowDropdownMenu.offsetHeight;
+    var menuWidth = els.rowDropdownMenu.offsetWidth;
+    var left = Math.min(rect.right - menuWidth, window.innerWidth - menuWidth - 8);
+    els.rowDropdownMenu.style.left = Math.max(8, left) + 'px';
+    els.rowDropdownMenu.style.top = (rect.top - menuHeight - 8) + 'px';
+  }
+
+  function closeRowDropdown() {
+    els.rowDropdownMenu.hidden = true;
+    dropdownTargetIndex = null;
+  }
+
+  els.domainsTableBody.addEventListener('click', function (e) {
+    var btn = e.target.closest('button[data-action]');
+    if (!btn) return;
+    var index = parseInt(btn.getAttribute('data-index'), 10);
+    var action = btn.getAttribute('data-action');
+
+    if (action === 'renew') {
+      var record = state.domains[index];
+      openPaymentModal({ type: 'renew', index: index, reg: { domain: record.domain, price: record.price } });
+    } else if (action === 'manage') {
+      openManageDomain(index);
+    } else if (action === 'menu') {
+      e.stopPropagation();
+      if (dropdownTargetIndex === index && !els.rowDropdownMenu.hidden) {
+        closeRowDropdown();
+      } else {
+        openRowDropdown(btn, index);
+      }
+    }
+  });
+
+  els.makePrimaryBtn.addEventListener('click', function () {
+    if (dropdownTargetIndex === null) return;
+    state.domains.forEach(function (d, i) { d.connected = (i === dropdownTargetIndex); });
+    closeRowDropdown();
+    renderDomainsTable();
+    refreshPrimaryDomainLabels();
+  });
+
+  function refreshPrimaryDomainLabels() {
+    var primary = state.domains.find(function (d) { return d.connected; });
+    if (primary) {
+      els.storeUrlText.textContent = primary.domain;
+      els.phoneDomainLabel.textContent = primary.domain;
+    } else {
+      els.storeUrlText.textContent = DEFAULT_STORE_URL;
+    }
+    return primary;
+  }
+
+  // ---- Manage domain ----
+
+  var manageTargetIndex = null;
+
+  function dnsRecordsFor(domain) {
+    var verifyToken = 'stan-verify=' + Math.random().toString(36).slice(2, 10);
+    return [
+      { type: 'A', name: '@', value: '76.76.21.21', ttl: 3600 },
+      { type: 'A', name: 'www', value: '76.76.21.21', ttl: 3600 },
+      { type: 'TXT', name: '_stan-verify', value: verifyToken, ttl: 3600 },
+      { type: 'CNAME', name: 'shop', value: 'store.stanwith.me', ttl: 3600 }
+    ];
+  }
+
+  function renderDnsRecords(records) {
+    els.dnsRecordsBody.innerHTML = records.map(function (r, i) {
+      return (
+        '<div class="dns-table__row" data-row="' + i + '">' +
+          '<span><strong>' + r.type + '</strong></span>' +
+          '<span>' + r.name + '</span>' +
+          '<span>' + r.value + '</span>' +
+          '<span class="dns-ttl">' + r.ttl + '</span>' +
+          '<button type="button" class="dns-delete-btn" aria-label="Delete record">' +
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M10 11v6M14 11v6"/><path d="M6 7l1 13a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-13"/><path d="M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"/></svg>' +
+          '</button>' +
+        '</div>'
+      );
+    }).join('');
+  }
+
+  els.dnsRecordsBody.addEventListener('click', function (e) {
+    var btn = e.target.closest('.dns-delete-btn');
+    if (!btn) return;
+    btn.closest('.dns-table__row').remove();
+  });
+
+  function openManageDomain(index) {
+    manageTargetIndex = index;
+    var record = state.domains[index];
+
+    els.manageDomainName.textContent = record.domain;
+    els.managePrimaryBadge.hidden = !record.connected;
+    els.manageInfoSubtitle.textContent = 'Connected to your Stan store · Renews ' + formatDate(record.expiry);
+
+    renderDnsRecords(dnsRecordsFor(record.domain));
+
+    els.manageAutoRenewToggle.checked = record.autoRenew;
+    els.manageAutoRenewSubtitle.textContent = record.autoRenew
+      ? 'Renews automatically at $' + record.price + '/yr on ' + formatDate(record.expiry) + '. Cancel anytime.'
+      : 'Auto-renew is off. ' + record.domain + ' will not renew automatically.';
+
+    els.manageTransferSubtitle.textContent = 'Move ' + record.domain + ' to another registrar. We’ll send you an authorization code.';
+    els.manageDeleteSubtitle.textContent = 'Permanently remove ' + record.domain + ' from your account. This can’t be undone.';
+
+    els.myDomainsSection.hidden = true;
+    els.connectDomainSection.hidden = true;
+    els.heroRow.hidden = true;
+    els.resultsSection.hidden = true;
+    els.registrationSection.hidden = true;
+    els.manageDomainSection.hidden = false;
+  }
+
+  function closeManageDomain() {
+    manageTargetIndex = null;
+    els.manageDomainSection.hidden = true;
+    els.myDomainsSection.hidden = false;
+    els.connectDomainSection.hidden = false;
+    els.heroRow.hidden = false;
+    els.resultsSection.hidden = true;
+  }
+
+  els.manageBackBtn.addEventListener('click', closeManageDomain);
+
+  els.manageAutoRenewToggle.addEventListener('change', function () {
+    if (manageTargetIndex === null) return;
+    var record = state.domains[manageTargetIndex];
+    record.autoRenew = els.manageAutoRenewToggle.checked;
+    els.manageAutoRenewSubtitle.textContent = record.autoRenew
+      ? 'Renews automatically at $' + record.price + '/yr on ' + formatDate(record.expiry) + '. Cancel anytime.'
+      : 'Auto-renew is off. ' + record.domain + ' will not renew automatically.';
+    renderDomainsTable();
+  });
+
+  els.domainsTableBody.addEventListener('change', function (e) {
+    var input = e.target.closest('input[data-action="toggle-renew"]');
+    if (!input) return;
+    var index = parseInt(input.getAttribute('data-index'), 10);
+    state.domains[index].autoRenew = input.checked;
+    renderDomainsTable();
+  });
+
+  document.addEventListener('click', function (e) {
+    if (els.rowDropdownMenu.hidden) return;
+    if (e.target.closest('#rowDropdownMenu') || e.target.closest('[data-action="menu"]')) return;
+    closeRowDropdown();
+  });
+
+  window.addEventListener('scroll', closeRowDropdown, true);
+  window.addEventListener('resize', closeRowDropdown);
+})();
+</script>
+
+</body>
+</html>

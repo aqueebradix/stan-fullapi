@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Abigail Peugh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+
+  html, body {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  ::-webkit-scrollbar { display: none; width: 0; height: 0; }
+
+  body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: #ffffff;
+    color: #171616;
+  }
+  .page {
+    max-width: 420px;
+    margin: 0 auto;
+    padding: 24px 16px 44px;
+  }
+
+  /* Header */
+  .store-header__content {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 26px;
+  }
+  .store-header__image {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .store-header__image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .store-header__fullname { font-weight: 800; font-size: 17px; margin-bottom: 8px; }
+  .social-icons { display: flex; gap: 6px; }
+  .social-icons__icon {
+    width: 27px;
+    height: 27px;
+    border: 1.5px solid #171616;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #171616;
+    flex-shrink: 0;
+  }
+  .social-icons__icon svg { width: 14px; height: 14px; }
+
+  /* Callout blocks */
+  .block--callout {
+    border: 1.6px solid #A81803;
+    border-radius: 20px;
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+  .block__content { display: flex; gap: 12px; margin-bottom: 14px; }
+  .block__image img {
+    width: 58px;
+    height: 58px;
+    border-radius: 12px;
+    object-fit: cover;
+    display: block;
+  }
+  .block__heading { font-weight: 800; font-size: 15px; line-height: 1.3; margin: 0 0 6px; }
+  .block__subheading { font-size: 12.5px; color: #6b6b6b; line-height: 1.4; margin: 0 0 8px; }
+
+  .price-review { display: flex; align-items: center; gap: 8px; }
+  .product-price .amount { font-weight: 800; font-size: 15px; color: #A81803; }
+  .rating { display: flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 700; }
+  .rating svg { width: 12px; height: 12px; }
+
+  .cta-button__button {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background: #A81803;
+    color: #fff;
+    font-weight: 800;
+    font-size: 13px;
+    border: none;
+    padding: 15px;
+    border-radius: 999px;
+    box-shadow: 0 6px 14px rgba(168, 24, 3, 0.28);
+  }
+
+  /* Pill blocks */
+  .block--pill {
+    border: 1.6px solid #A81803;
+    border-radius: 999px;
+    padding: 8px 14px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    background: none;
+    text-align: left;
+  }
+  .block__image--pill {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .block__image--pill img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .block__text--pill { font-weight: 700; font-size: 13px; }
+
+  .section-title {
+    text-align: center;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .04em;
+    color: #6b6b6b;
+    background: #f2f2f2;
+    border-radius: 999px;
+    padding: 6px 14px;
+    display: inline-block;
+    margin: 8px auto 16px;
+  }
+  .section-title-wrap { text-align: center; }
+
+  .store-footer-controls {
+    text-align: center;
+    margin-top: 26px;
+    font-size: 11.5px;
+    color: #9a9a9a;
+  }
+  .store-locale-picker__trigger {
+    margin-top: 10px;
+    background: none;
+    border: none;
+    font-size: 11px;
+    color: #9a9a9a;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+
+    <div class="store-header__content">
+      <div class="store-header__image"><img src="profile.webp" alt="Abigail Peugh"></div>
+      <div class="store-header__profile">
+        <div class="store-header__fullname">Abigail Peugh</div>
+        <div class="social-icons">
+          <span class="social-icons__icon">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.06,.06c-3.24,0-3.65,.01-4.92,.07-1.27,.06-2.14,.26-2.9,.55-.79,.3-1.45,.71-2.11,1.38-.66,.66-1.07,1.33-1.38,2.11-.3,.76-.5,1.63-.55,2.9-.06,1.27-.07,1.68-.07,4.92s.01,3.65,.07,4.92c.06,1.27,.26,2.14,.55,2.9,.31,.79,.71,1.45,1.38,2.11,.66,.66,1.33,1.07,2.11,1.38,.76,.3,1.63,.5,2.9,.55,1.27,.06,1.68,.07,4.92,.07s3.65-.01,4.92-.07c1.27-.06,2.14-.26,2.9-.55,.78-.3,1.45-.71,2.11-1.38,.66-.66,1.07-1.33,1.38-2.11,.29-.76,.49-1.63,.55-2.9,.06-1.27,.07-1.68,.07-4.92s-.01-3.65-.07-4.92c-.06-1.27-.26-2.14-.55-2.9-.31-.79-.71-1.45-1.38-2.11-.66-.66-1.33-1.07-2.11-1.38-.76-.3-1.63-.5-2.9-.55-1.27-.06-1.68-.07-4.92-.07h0Zm-1.07,2.15c.32,0,.67,0,1.07,0,3.19,0,3.56,.01,4.82,.07,1.16,.05,1.8,.25,2.22,.41,.56,.22,.95,.47,1.37,.89,.42,.42,.68,.82,.89,1.37,.16,.42,.36,1.05,.41,2.22,.06,1.26,.07,1.64,.07,4.82s-.01,3.56-.07,4.82c-.05,1.16-.25,1.8-.41,2.22-.22,.56-.48,.95-.89,1.37-.42,.42-.81,.68-1.37,.89-.42,.16-1.05,.36-2.22,.41-1.26,.06-1.64,.07-4.82,.07s-3.56-.01-4.82-.07c-1.16-.05-1.8-.25-2.22-.41-.56-.22-.95-.47-1.37-.89-.42-.42-.68-.81-.89-1.37-.16-.42-.36-1.05-.41-2.22-.06-1.26-.07-1.64-.07-4.82s.01-3.56,.07-4.82c.05-1.16,.25-1.8,.41-2.22,.22-.56,.48-.95,.89-1.37,.42-.42,.82-.68,1.37-.89,.42-.16,1.05-.36,2.22-.41,1.1-.05,1.53-.06,3.75-.07h0Zm7.44,1.98c-.79,0-1.43,.64-1.43,1.43s.64,1.43,1.43,1.43,1.43-.64,1.43-1.43-.64-1.43-1.43-1.43h0Zm-6.37,1.67c-3.38,0-6.13,2.74-6.13,6.13s2.74,6.13,6.13,6.13c3.38,0,6.13-2.74,6.13-6.13s-2.74-6.13-6.13-6.13h0Zm0,2.15c2.2,0,3.98,1.78,3.98,3.98s-1.78,3.98-3.98,3.98-3.98-1.78-3.98-3.98,1.78-3.98,3.98-3.98Z"/></svg>
+          </span>
+          <span class="social-icons__icon">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.81,5.78v4.09c-2.12,0-4.09-.68-5.7-1.82v8.34c0,4.17-3.38,7.56-7.56,7.56-1.56,0-3-.47-4.21-1.28-2.02-1.36-3.35-3.66-3.35-6.28,0-4.17,3.38-7.56,7.56-7.56,.35,0,.69,.02,1.04,.07v4.18c-.33-.1-.68-.16-1.05-.16-1.91,0-3.46,1.55-3.46,3.46,0,1.35,.77,2.52,1.9,3.09,.47,.24,1,.37,1.56,.37,1.91,0,3.45-1.54,3.46-3.44V.06h4.11V.58c.02,.16,.04,.31,.06,.47,.29,1.63,1.26,3.02,2.61,3.86,.91,.57,1.96,.87,3.03,.86Z"/></svg>
+          </span>
+          <span class="social-icons__icon">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.2,3.71l-1.86,1.65-8.84,7.83c-.29,.26-.72,.26-1.01,0L2.66,5.36,.8,3.71c.46-.44,1.08-.71,1.76-.71H21.44c.68,0,1.3,.27,1.76,.71Z"/><path d="M24,5.56v12.88c0,1.41-1.15,2.56-2.56,2.56H2.56c-1.41,0-2.56-1.15-2.56-2.56V5.56l.15-.07L11.02,15.13c.56,.49,1.39,.49,1.95,0L23.85,5.49l.15,.07Z"/></svg>
+          </span>
+          <span class="social-icons__icon">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.46,6.27c-.28-1.03-1.08-1.83-2.11-2.11-1.38-.53-14.74-.79-18.62,.02-1.03,.28-1.83,1.08-2.11,2.11C0,9.02-.04,14.92,.64,17.72c.28,1.03,1.08,1.83,2.11,2.11,2.73,.63,15.72,.72,18.62,0,1.03-.28,1.83-1.08,2.11-2.11,.66-2.98,.71-8.52-.02-11.45ZM9.76,15.57v-7.14l6.23,3.57-6.23,3.57Z"/></svg>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="block--callout">
+      <div class="block__content">
+        <div class="block__image"><img src="th-challenge.webp" alt=""></div>
+        <div>
+          <h4 class="block__heading">Rich Girl Challenge</h4>
+          <p class="block__subheading">Build a live paid challenge your audience can't wait to buy!</p>
+          <div class="price-review">
+            <div class="product-price"><span class="amount">$297</span></div>
+          </div>
+        </div>
+      </div>
+      <button class="cta-button__button">JOIN THE CHALLENGE</button>
+    </div>
+
+    <button class="block--pill">
+      <span class="block__image--pill"><img src="th-podcast.webp" alt=""></span>
+      <span class="block__text--pill">LISTEN TO MY PODCAST 🎧</span>
+    </button>
+
+    <div class="block--callout">
+      <div class="block__content">
+        <div class="block__image"><img src="th-community.webp" alt=""></div>
+        <div>
+          <h4 class="block__heading">Rich Girl Community</h4>
+          <p class="block__subheading">Let me tell you what to post to turn your content into daily digital product sales for $2.56 a day</p>
+          <div class="price-review">
+            <div class="product-price"><span class="amount">$77</span></div>
+            <div class="rating">
+              <svg viewBox="0 0 13 13" fill="none"><path d="M6.6574 0L8.75579 4.11181L13.3148 4.83688L10.0527 8.10319L10.7719 12.6631L6.6574 10.57L2.5429 12.6631L3.26212 8.10319L0 4.83688L4.559 4.11181L6.6574 0Z" fill="#FEC337"/></svg>
+              <span>5.0</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="cta-button__button">Join My Community</button>
+    </div>
+
+    <div class="block--callout">
+      <div class="block__content">
+        <div class="block__image"><img src="th-sell.webp" alt=""></div>
+        <div>
+          <h4 class="block__heading">7 Days, 7 Ways to Sell Like a Rich Girl 💰</h4>
+          <p class="block__subheading">Already have a digital product and want to sell more of it? Grab this freebie!</p>
+        </div>
+      </div>
+      <button class="cta-button__button">START SELLING MORE</button>
+    </div>
+
+    <div class="section-title-wrap"><span class="section-title">THINGS I LOVE (affiliate links)</span></div>
+
+    <div class="block--callout">
+      <div class="block__content">
+        <div class="block__image"><img src="th-stanstore.webp" alt=""></div>
+        <div>
+          <h4 class="block__heading">Get your own Stan Store!</h4>
+          <p class="block__subheading">I have an exclusive 30 day free trial for Stan! This is my favorite platform for selling DP's!</p>
+        </div>
+      </div>
+      <button class="cta-button__button">30 DAY FREE TRIAL</button>
+    </div>
+
+    <div class="block--callout">
+      <div class="block__content">
+        <div class="block__image"><img src="th-manychat.webp" alt=""></div>
+        <div>
+          <h4 class="block__heading">ManyChat Sign up!</h4>
+          <p class="block__subheading">Get 14 days free of ManyChat pro when you use my affiliate link! 😉</p>
+        </div>
+      </div>
+      <button class="cta-button__button">CLICK HERE TO CLAIM!</button>
+    </div>
+
+    <button class="block--pill">
+      <span class="block__image--pill"><img src="th-terms.webp" alt=""></span>
+      <span class="block__text--pill">Terms &amp; Conditions for DP</span>
+    </button>
+
+    <button class="block--pill">
+      <span class="block__image--pill"><img src="th-sell.webp" alt=""></span>
+      <span class="block__text--pill">50% off FLODESK 💌</span>
+    </button>
+
+    <div class="block--callout">
+      <div class="block__content">
+        <div class="block__image"><img src="th-tools.webp" alt=""></div>
+        <div>
+          <h4 class="block__heading">CONTENT CREATION TOOLS</h4>
+          <p class="block__subheading">These are my favorite tools to use as a content creator!</p>
+        </div>
+      </div>
+      <button class="cta-button__button">CHECK THEM OUT</button>
+    </div>
+
+    <div class="block--callout">
+      <div class="block__content">
+        <div class="block__image"><img src="th-makeup.webp" alt=""></div>
+        <div>
+          <h4 class="block__heading">Best makeup for Content Creation</h4>
+          <p class="block__subheading">My favorite non toxic makeup to wear while creating content! Tinted SPF, liquid blush, and mascara!</p>
+        </div>
+      </div>
+      <button class="cta-button__button">CLICK FOR MY FAVS</button>
+    </div>
+
+    <div class="store-footer-controls">
+      Privacy Policy
+      <div class="store-locale-picker__trigger">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        EN
+      </div>
+    </div>
+  </div>
+</body>
+</html>
