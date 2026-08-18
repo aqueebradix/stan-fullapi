@@ -655,61 +655,6 @@
 
   .success-body a { color: var(--stan-primary-primary-color); font-weight: 600; }
 
-  /* Search hero / success + phone preview row */
-
-  .hero-row {
-    display: flex;
-    align-items: flex-start;
-    gap: 20px;
-  }
-
-  .hero-row-main {
-    flex: 1;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  @media (max-width: 760px) {
-    .hero-row { flex-direction: column; }
-    .phone-preview-section { align-self: center; }
-  }
-
-  .phone-preview-section { flex-shrink: 0; }
-
-  .phone-frame {
-    width: 246px;
-    height: 470px;
-    border: 8px solid var(--stan-text-dark-color);
-    border-radius: 34px;
-    background: var(--stan-white);
-    box-shadow: var(--stan-box-shadow);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
-
-  .phone-top-bar {
-    background: var(--stan-text-dark-color);
-    color: var(--stan-white);
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    text-align: center;
-    padding: 8px 10px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .phone-iframe {
-    flex: 1;
-    width: 100%;
-    border: none;
-    background: var(--stan-white);
-  }
-
   /* Connect a domain */
 
   .connect-domain-card {
@@ -1247,52 +1192,41 @@
       <button type="button" class="btn btn-outline connect-domain-btn">Connect domain</button>
     </section>
 
-    <!-- Search hero / success + live site preview -->
-    <div class="hero-row" id="heroRow">
-      <div class="hero-row-main">
-        <section id="searchHero" class="card search-hero-card">
-          <h2 id="searchHeadline">Find your name. <span>⚡</span></h2>
-          <p class="search-subline">More clicks, more sales</p>
-          <form id="searchForm" class="search-form">
-            <div class="search-input-wrap">
-              <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="11" cy="11" r="7"/>
-                <path d="M21 21l-4.35-4.35"/>
-              </svg>
-              <input id="searchInput" type="text" placeholder="e.g. abigail" autocomplete="off">
-            </div>
-            <button type="submit" class="btn btn-primary">Search</button>
-          </form>
-          <div class="search-tips">
-            <span class="tip-chip">Keep it under 15 characters</span>
-            <span class="tip-chip">Avoid hyphens &amp; numbers</span>
-            <span class="tip-chip">Start with your brand name</span>
-          </div>
-        </section>
-
-        <!-- Success -->
-        <section id="successSection" class="card success-card" hidden>
-          <div class="success-header">
-            <div class="success-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-            </div>
-            <h2>Domain registered!</h2>
-            <p id="successDomainLine"></p>
-          </div>
-          <div class="success-body">
-            <p id="successMessage"></p>
-            <button class="btn btn-primary" id="myDomainsCtaBtn">My domains →</button>
-          </div>
-        </section>
-      </div>
-
-      <section id="phonePreviewSection" class="phone-preview-section" hidden>
-        <div class="phone-frame">
-          <div class="phone-top-bar" id="phoneDomainLabel"></div>
-          <iframe class="phone-iframe" src="assets/abigail/preview.html" title="Site preview"></iframe>
+    <!-- Search hero -->
+    <section id="searchHero" class="card search-hero-card">
+      <h2 id="searchHeadline">Find your name. <span>⚡</span></h2>
+      <p class="search-subline">More clicks, more sales</p>
+      <form id="searchForm" class="search-form">
+        <div class="search-input-wrap">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="7"/>
+            <path d="M21 21l-4.35-4.35"/>
+          </svg>
+          <input id="searchInput" type="text" placeholder="e.g. abigail" autocomplete="off">
         </div>
-      </section>
-    </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+      </form>
+      <div class="search-tips">
+        <span class="tip-chip">Keep it under 15 characters</span>
+        <span class="tip-chip">Avoid hyphens &amp; numbers</span>
+        <span class="tip-chip">Start with your brand name</span>
+      </div>
+    </section>
+
+    <!-- Success -->
+    <section id="successSection" class="card success-card" hidden>
+      <div class="success-header">
+        <div class="success-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        </div>
+        <h2>Domain registered!</h2>
+        <p id="successDomainLine"></p>
+      </div>
+      <div class="success-body">
+        <p id="successMessage"></p>
+        <button class="btn btn-primary" id="myDomainsCtaBtn">My domains →</button>
+      </div>
+    </section>
 
     <!-- Results -->
     <section id="resultsSection" hidden>
@@ -1376,7 +1310,7 @@
         </div>
         <div class="consent-row">
           <input type="checkbox" id="legalConsent" required>
-          <label for="legalConsent">I agree to create a domain account with Namify and accept their <a href="#" target="_blank" rel="noopener">legal terms</a>.</label>
+          <label for="legalConsent">I agree to create a domain account with Stan and accept their <a href="#" target="_blank" rel="noopener">legal terms</a>.</label>
         </div>
         <div class="reg-actions">
           <button type="button" class="btn btn-outline" id="cancelRegBtn">Cancel</button>
@@ -1562,8 +1496,6 @@
     myDomainsSection: document.getElementById('myDomainsSection'),
     domainsTableBody: document.getElementById('domainsTableBody'),
     storeUrlText: document.getElementById('storeUrlText'),
-    phonePreviewSection: document.getElementById('phonePreviewSection'),
-    phoneDomainLabel: document.getElementById('phoneDomainLabel'),
     paymentModal: document.getElementById('paymentModal'),
     invoiceTitle: document.getElementById('invoiceTitle'),
     invoiceAmount: document.getElementById('invoiceAmount'),
@@ -1581,7 +1513,6 @@
     rowDropdownMenu: document.getElementById('rowDropdownMenu'),
     makePrimaryBtn: document.getElementById('makePrimaryBtn'),
     connectDomainSection: document.getElementById('connectDomainSection'),
-    heroRow: document.getElementById('heroRow'),
     manageDomainSection: document.getElementById('manageDomainSection'),
     manageBackBtn: document.getElementById('manageBackBtn'),
     manageDomainName: document.getElementById('manageDomainName'),
@@ -1740,8 +1671,7 @@
 
     renderDomainsTable();
     updateSearchHeadline();
-    var primary = refreshPrimaryDomainLabels();
-    els.phonePreviewSection.hidden = !primary;
+    refreshPrimaryDomainLabels();
 
     els.registrationSection.hidden = true;
     els.successDomainLine.textContent = reg.domain + ' is now yours';
@@ -1756,7 +1686,6 @@
 
   function goToMyDomains() {
     els.successSection.hidden = true;
-    els.phonePreviewSection.hidden = true;
     els.searchHero.hidden = false;
     els.resultsSection.hidden = true;
     els.searchInput.value = '';
@@ -1789,9 +1718,9 @@
     els.cardName.value = firstNameField && lastNameField
       ? (firstNameField.value + ' ' + lastNameField.value).trim()
       : 'Abigail Peugh';
-    els.cardNumber.value = '';
-    els.cardExpiry.value = '';
-    els.cardCvc.value = '';
+    els.cardNumber.value = '1111 1111 1111 1111';
+    els.cardExpiry.value = '12/29';
+    els.cardCvc.value = '123';
 
     els.paymentModal.hidden = false;
   }
@@ -1929,12 +1858,7 @@
 
   function refreshPrimaryDomainLabels() {
     var primary = state.domains.find(function (d) { return d.connected; });
-    if (primary) {
-      els.storeUrlText.textContent = primary.domain;
-      els.phoneDomainLabel.textContent = primary.domain;
-    } else {
-      els.storeUrlText.textContent = DEFAULT_STORE_URL;
-    }
+    els.storeUrlText.textContent = primary ? primary.domain : DEFAULT_STORE_URL;
     return primary;
   }
 
@@ -1994,7 +1918,8 @@
 
     els.myDomainsSection.hidden = true;
     els.connectDomainSection.hidden = true;
-    els.heroRow.hidden = true;
+    els.searchHero.hidden = true;
+    els.successSection.hidden = true;
     els.resultsSection.hidden = true;
     els.registrationSection.hidden = true;
     els.manageDomainSection.hidden = false;
@@ -2005,7 +1930,7 @@
     els.manageDomainSection.hidden = true;
     els.myDomainsSection.hidden = false;
     els.connectDomainSection.hidden = false;
-    els.heroRow.hidden = false;
+    els.searchHero.hidden = false;
     els.resultsSection.hidden = true;
   }
 
